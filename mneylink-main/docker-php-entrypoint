@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+
+mkdir -p /var/www/html/tmp/cache/{models,persistent,proxy,views,sessions}
+mkdir -p /var/www/html/tmp/{sessions,tests}
+chmod -R 770 /var/www/html/tmp
+chown -R www-data:www-data /var/www/html
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+set -- apache2-foreground "$@"
+fi
+
+
+exec "$@"

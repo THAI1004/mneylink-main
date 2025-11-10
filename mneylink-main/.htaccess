@@ -1,0 +1,233 @@
+DirectoryIndex index.php
+
+#<Files ~ "\.(woff2|woff|ttf|otf|svg)$">
+#    Header add Access-Control-Allow-Origin "*"
+#</Files>
+
+# No directory listings
+IndexIgnore *
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    # Comment the following line if you have not a .well-known directory in the root folder.
+    RewriteRule ^(\.well-known/.*)$ $1 [L]
+	RewriteCond %{HTTP_USER_AGENT} !(Facebot|facebookexternalhit/1.1) [NC]
+    RewriteRule    ^$    webroot/    [L]
+    RewriteRule    (.*) webroot/$1    [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+	Header always append X-Frame-Options SAMEORIGIN
+	Header set X-Content-Type-Options nosniff
+    Header unset ETag
+    FileETag none
+</IfModule>
+
+<IfModule mod_deflate.c>
+    <IfModule mod_filter.c>
+        # Compress HTML, CSS, JavaScript, Text, XML and fonts
+        AddOutputFilterByType DEFLATE application/javascript
+        AddOutputFilterByType DEFLATE application/rss+xml
+        AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+        AddOutputFilterByType DEFLATE application/x-font
+        AddOutputFilterByType DEFLATE application/x-font-opentype
+        AddOutputFilterByType DEFLATE application/x-font-otf
+        AddOutputFilterByType DEFLATE application/x-font-truetype
+        AddOutputFilterByType DEFLATE application/x-font-ttf
+        AddOutputFilterByType DEFLATE application/x-javascript
+        AddOutputFilterByType DEFLATE application/xhtml+xml
+        AddOutputFilterByType DEFLATE application/xml
+        AddOutputFilterByType DEFLATE font/opentype
+        AddOutputFilterByType DEFLATE font/otf
+        AddOutputFilterByType DEFLATE font/ttf
+        AddOutputFilterByType DEFLATE image/svg+xml
+        AddOutputFilterByType DEFLATE image/x-icon
+        AddOutputFilterByType DEFLATE text/css
+        AddOutputFilterByType DEFLATE text/html
+        AddOutputFilterByType DEFLATE text/javascript
+        AddOutputFilterByType DEFLATE text/plain
+        AddOutputFilterByType DEFLATE text/xml
+    </IfModule>
+
+    <IfModule mod_headers.c>
+        # Remove browser bugs (only needed for really old browsers)
+        BrowserMatch ^Mozilla/4 gzip-only-text/html
+        BrowserMatch ^Mozilla/4\.0[678] no-gzip
+        BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+        Header append Vary User-Agent
+    </IfModule>
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Video
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType video/mpeg "access plus 1 year"
+
+    # CSS, JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # Others
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+</IfModule>
+
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+deny from 116.110.43.65
+deny from 104.28.205.70
+deny from 115.74.53.170
+deny from 14.244.102.73
+deny from 115.73.201.102
+deny from 113.187.24.25
+deny from 123.22.56.207
+deny from 14.188.246.105
+deny from 123.23.28.96
+deny from 115.76.55.127
+deny from 58.97.220.254
+deny from 113.185.74.78
+deny from 14.255.113.95
+deny from 115.76.55.103
+deny from 125.235.236.130
+deny from 27.75.51.178
+deny from 27.75.63.129
+deny from 115.76.55.79
+deny from 115.77.219.216
+deny from 125.212.157.211
+deny from 113.169.168.211
+deny from 116.96.2.13
+deny from 116.104.254.61
+deny from 14.229.99.206
+deny from 171.241.210.128
+deny from 59.153.224.22
+deny from 14.244.72.95
+deny from 8.21.11.189
+deny from 42.118.118.70
+deny from 123.31.244.81
+deny from 103.199.33.143
+deny from 113.191.171.76
+deny from 91.69.130.60
+deny from 8.21.11.234
+deny from 115.72.72.150
+deny from 14.164.161.4
+deny from 14.245.247.152
+deny from 59.153.245.121
+deny from 59.153.242.134
+deny from 27.71.120.201
+deny from 103.82.24.232
+deny from 125.235.239.240
+deny from 104.28.237.72
+deny from 171.255.123.216
+deny from 113.22.146.97
+deny from 171.244.57.197
+deny from 58.187.122.140
+deny from 171.249.187.135
+deny from 171.249.145.111
+deny from 27.67.184.216
+deny from 27.68.86.208
+deny from 123.27.213.193
+deny from 27.67.4.85
+deny from 171.224.180.14
+deny from 113.191.200.219
+deny from 14.251.213.157
+deny from 42.118.1.46
+deny from 27.67.183.105
+deny from 171.245.246.212
+deny from 113.185.76.197
+deny from 116.107.213.216
+deny from 115.72.189.53
+deny from 14.188.41.168
+deny from 14.228.76.237
+deny from 115.76.54.124
+deny from 123.27.213.193
+deny from 113.185.77.7
+deny from 59.153.244.82
+deny from 171.249.35.125
+deny from 113.22.175.224
+deny from 183.80.215.155
+deny from 123.25.240.122
+deny from 125.235.235.160
+deny from 113.22.175.224
+deny from 125.235.234.226
+deny from 183.80.215.155
+deny from 42.1.90.140
+deny from 59.153.233.40
+deny from 116.96.45.17
+deny from 14.177.60.242
+deny from 171.247.43.57
+deny from 125.235.212.250
+deny from 116.102.161.66
+deny from 27.64.190.113
+deny from 171.249.200.92
+deny from 171.233.200.76
+deny from 14.164.198.16
+deny from 27.67.184.216
+deny from 27.68.86.208
+deny from 171.225.184.166
+deny from 171.225.185.114
+deny from 1.55.30.131
+deny from 183.80.228.108
+deny from 1.54.203.199
+deny from 123.27.84.5
+deny from 1.54.155.180
+deny from 113.22.173.227
+deny from 116.97.214.207
+deny from 116.97.222.161
+deny from 116.97.214.207
+deny from 116.97.222.161
+deny from 14.228.136.169
+deny from 113.189.164.15
+deny from 58.187.12.111
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_flag display_errors Off
+   php_value max_execution_time 300
+   php_value max_input_time 600
+   php_value max_input_vars 10000
+   php_value memory_limit 128M
+   php_value post_max_size 128M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/run/apache2"
+   php_value upload_max_filesize 256M
+   php_flag zlib.output_compression Off
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors Off
+   php_value max_execution_time 300
+   php_value max_input_time 600
+   php_value max_input_vars 10000
+   php_value memory_limit 128M
+   php_value post_max_size 128M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/run/apache2"
+   php_value upload_max_filesize 256M
+   php_flag zlib.output_compression Off
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php81” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php81 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

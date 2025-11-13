@@ -73,7 +73,7 @@
 
             <nav id="navmenu" class="navmenu">
                 <?=
-                menu_display('mneu_main', [
+                menu_display('menu_main', [
                     'ul_class' => '',
                     'li_class' => '',
                     'a_class' => '',
@@ -100,7 +100,7 @@
 
     <!-- Scripts -->
     <script data-cfasync="false" src="<?= $this->Assets->url('/js/ads.js?ver=' . APP_VERSION) ?>"></script>
-    <script src="<?= $this->Url->build('/asset/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= $this->Url->build('/vendor/bootstrap/js/bootstrap.min.js') ?>"></script>
     <script src="<?= $this->Url->build('/asset/js/jquery.min.js') ?>"></script>
     <!-- Vendor JS Files -->
     <script src="<?= $this->Url->build('/vendors/glightbox.min.js') ?>"></script>

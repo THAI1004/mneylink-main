@@ -1,0 +1,90 @@
+================================================================================
+HƯỚNG DẪN SỬA LỖI DATABASE - MNEYLINK
+================================================================================
+
+LỖI: "An Internal Error Has Occurred" khi đăng nhập member dashboard
+
+NGUYÊN NHÂN:
+- Thiếu bảng buyer_reports
+- Thiếu bảng member_reports  
+- Thiếu cột device trong bảng traffics
+
+================================================================================
+CÁCH SỬA NHANH NHẤT (KHUYẾN NGHỊ)
+================================================================================
+
+BƯỚC 1: Mở Laragon và đảm bảo MySQL đang chạy
+
+BƯỚC 2: Double-click vào file: fix_database.bat
+
+BƯỚC 3: Xem kết quả và nhấn Enter để đóng
+
+XONG! Thử đăng nhập lại vào member dashboard.
+
+================================================================================
+CÁCH 2: SỬ DỤNG PHPMYADMIN
+================================================================================
+
+BƯỚC 1: Mở Laragon, click vào nút "Database" để mở phpMyAdmin
+
+BƯỚC 2: Chọn database "mneylink" ở menu bên trái
+
+BƯỚC 3: Click vào tab "SQL" ở trên cùng
+
+BƯỚC 4: Mở file "create_missing_tables.sql" bằng Notepad
+
+BƯỚC 5: Copy toàn bộ nội dung và paste vào ô SQL trong phpMyAdmin
+
+BƯỚC 6: Click nút "Go" ở góc dưới bên phải
+
+BƯỚC 7: Thấy thông báo thành công là OK!
+
+================================================================================
+KIỂM TRA SAU KHI SỬA
+================================================================================
+
+1. Xóa cache (nếu có):
+   - Xóa tất cả file trong thư mục: tmp/cache/
+
+2. Đăng nhập lại vào member dashboard
+
+3. Nếu vẫn lỗi, kiểm tra file: logs/error.log để xem lỗi mới
+
+================================================================================
+CÁC BẢNG VÀ CỘT ĐÃ TẠO
+================================================================================
+
+1. Bảng buyer_reports:
+   - Lưu các yêu cầu chỉnh sửa traffic từ buyer
+   
+2. Bảng member_reports:
+   - Lưu các báo cáo vấn đề từ member
+
+3. Cột traffics.device:
+   - 0 = Tất cả thiết bị
+   - 1 = Chỉ Desktop
+   - 2 = Chỉ Mobile
+
+================================================================================
+LƯU Ý QUAN TRỌNG
+================================================================================
+
+- Script an toàn, có thể chạy nhiều lần không lo bị lỗi
+- Sử dụng IF NOT EXISTS nên không tạo trùng
+- Nếu bảng đã có thì sẽ bỏ qua
+
+================================================================================
+NẾU VẪN GẶP VẤN ĐỀ
+================================================================================
+
+Kiểm tra:
+1. MySQL có chạy trong Laragon không?
+2. Database "mneylink" có tồn tại không?
+3. Port MySQL có đúng là 3307 không? (xem trong config/app_local.php)
+4. Username/password MySQL có đúng không?
+
+Xem log chi tiết tại: logs/error.log
+
+================================================================================
+
+
